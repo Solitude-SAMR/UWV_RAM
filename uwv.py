@@ -91,6 +91,8 @@ def main(start_zero):
 
   if start_zero:
     dir = output_dict
+    if not os.path.exists(dir):
+      os.makedirs(dir)
     for f in os.listdir(dir):
       os.remove(os.path.join(dir, f))
 
