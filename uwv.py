@@ -67,7 +67,7 @@ def s_mis_detect(y_pred_batch, y_real):
   real_classes = y_real[:,[1]].to(dtype = torch.int64)
   for y_pred in y_pred_batch:
     if len(y_pred) != len(y_real):
-      y_diff.append(torch.tensor(1).cuda())
+      y_diff.append(torch.tensor(1))
     else:
       advs = s_adv(y_pred[:,6:], real_classes)
       y_diff.append(advs) 
@@ -129,7 +129,7 @@ def main(start_zero):
   # Get data configuration
   data_config = parse_data_config("data/custom.data")
   op_data_path = data_config['op_data']
-  class_names = load_classes(data_config["names"])
+
 
   # Load test dataloader
   dataloader = _create_data_loader(

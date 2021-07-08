@@ -17,13 +17,6 @@ matplotlib.rc('font', family='Latin Modern Roman')
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
-# color images
-x_min = torch.tensor([0, 0, 0]).cuda()
-x_max = torch.tensor([1, 1, 1]).cuda()
-
-# # MNIST
-# x_min = 0
-# x_max = 1
 
 
 def greyscale_multilevel_uniform(
@@ -38,6 +31,11 @@ def greyscale_multilevel_uniform(
     # Calculate the mean of the normal distribution in logit space
     # We transform the input from [x_min, x_max] to [epsilon, 1 - epsilon], then to [logit(epsilon), logit(1 - epsilon)]
     # Then we can do the sampling on (-inf, inf)
+
+    # MNIST
+    x_min = 0
+    x_max = 1
+
     if CUDA:
         prior = dist.Uniform(low=torch.max(x_sample-sigma, torch.tensor([x_min]).cuda()), high=torch.min(x_sample+sigma, torch.tensor([x_max]).cuda()))
     else:
@@ -182,13 +180,19 @@ def multilevel_uniform(
     # Calculate the mean of the normal distribution in logit space
     # We transform the input from [x_min, x_max] to [epsilon, 1 - epsilon], then to [logit(epsilon), logit(1 - epsilon)]
     # Then we can do the sampling on (-inf, inf)
-    prior = dist.Uniform(low=torch.max(x_sample-sigma*(x_max-x_min).view(3,1,1), x_min.view(3,1,1)), high=torch.min(x_sample+sigma*(x_max-x_min).view(3,1,1), x_max.view(3,1,1)))
 
     # Parameters
     if CUDA:
-        width_proposal = sigma*torch.ones(count_particles).cuda()/5
+        width_proposal = sigma * torch.ones(count_particles).cuda() / 5
+        # color images
+        x_min = torch.tensor([0, 0, 0]).cuda()
+        x_max = torch.tensor([1, 1, 1]).cuda()
     else:
-        width_proposal = sigma*torch.ones(count_particles)/5
+        width_proposal = sigma * torch.ones(count_particles) / 5
+        x_min = torch.tensor([0, 0, 0])
+        x_max = torch.tensor([1, 1, 1])
+
+    prior = dist.Uniform(low=torch.max(x_sample-sigma*(x_max-x_min).view(3,1,1), x_min.view(3,1,1)), high=torch.min(x_sample+sigma*(x_max-x_min).view(3,1,1), x_max.view(3,1,1)))
 
     count_max_levels = 500
     target_acc_ratio = 0.9
