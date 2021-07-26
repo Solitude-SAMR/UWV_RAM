@@ -19,3 +19,4 @@ Unzip the folder and add to the root directory, run the following command to sta
 ```
 python uwv.py
 ```
+When the program is running, all test result for each demand (image) is saved to the output folder with format (latent_represenation, x_class, pmi).
