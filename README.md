@@ -31,4 +31,8 @@ run the following command to start testing:
 ```
 python uwv.py
 ```
-When the program is running, all test result for each demand (image) is saved to the output folder with format (latent_represenation, x_class, pmi).
+When the program is running, all test result for each demand (image) is saved to the output folder with format (latent_represenation, x_class, pmi). pmi is the abbreviation probabity of misclassification per input. Then you can visualize the robustness verification results of all the inputs, the update of reliability (pmi) by running
+```
+python plot.py
+```
+
