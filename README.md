@@ -15,7 +15,19 @@ Download the dataset and trained model weight from server using wget:
 ```
 wget -P ./ https://cgi.csc.liv.ac.uk/~acps/datasets/SOLITUDE/data.zip
 ```
-Unzip the folder and add to the root directory, run the following command to start testing:
+Unzip the folder and add to the root directory.
+
+## Train the UWV Model and VAE Model
+To train the yoloV3 model by yourself for UWV object detection, run
+```
+python -m pytorchyolo.train
+```
+To train the variantional autoencoder model by yourself to compress the UWV simulation images, run
+```
+python uwv_vae.py
+```
+## Test the Reliability of Object Detection Model 
+run the following command to start testing:
 ```
 python uwv.py
 ```
