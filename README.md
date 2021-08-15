@@ -10,12 +10,18 @@ This should be followed by installing software dependencies:
 ```
 pip3 install matplotlib scikit-learn torch torchsummary torchvision tqdm imgaug tensorboard terminaltables
 ```
+## Fetch the Code
+Fetch the source code for the reliabity assessment of UWV by run:
+```
+git clone https://github.com/Solitude-SAMR/UWV_RAM
+```
+
 ## Prepare the Dataset
 Download the dataset and trained model weight from server using wget:
 ```
 wget -P ./ https://cgi.csc.liv.ac.uk/~acps/datasets/SOLITUDE/data.zip
 ```
-Unzip the folder and add to the root directory.
+Unzip the folder and add to the root directory 'UWV_RAM/'.
 
 ## Train the UWV Model and VAE Model
 To train the yoloV3 model by yourself for UWV object detection, run
