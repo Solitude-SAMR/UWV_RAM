@@ -8,7 +8,7 @@ conda activate UWVRAM
 ```
 This should be followed by installing software dependencies:
 ```
-pip3 install scikit-learn torch torchsummary torchvision tqdm imgaug tensorboard terminaltables
+pip3 install matplotlib scikit-learn torch torchsummary torchvision tqdm imgaug tensorboard terminaltables
 ```
 ## Prepare the Dataset
 Download the dataset and trained model weight from server using wget:
