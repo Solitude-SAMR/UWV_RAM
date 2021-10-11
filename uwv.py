@@ -9,7 +9,7 @@ import torch.nn.functional as F
 from torchvision.utils import save_image
 from pytorchyolo import detect, models
 from pytorchyolo import train
-from pytorchyolo.utils.utils import to_cpu, load_classes, rescale_boxes, non_max_suppression, xywh2xyxy, box_iou
+from pytorchyolo.utils.utils import to_cpu, load_classes, rescale_boxes, non_max_suppression_test, xywh2xyxy, box_iou
 from pytorchyolo.utils.parse_config import parse_data_config
 from pytorchyolo.test import _create_data_loader, _create_validation_data_loader
 from pytorchyolo.train import _create_train_data_loader
@@ -218,7 +218,7 @@ def main(start_zero):
       with torch.no_grad():
         for x_batch in x_input:
           y_batch = model(x_batch)
-          y_batch = non_max_suppression(y_batch, conf_thres, nms_thres)
+          y_batch = non_max_suppression_test(y_batch, conf_thres, nms_thres)
           # property function s_mis_detect >= 0
           y_diff_batch = s_mis_detect(y_batch, x_class)
           y_diff.extend(y_diff_batch)
